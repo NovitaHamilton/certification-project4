@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+.App {
+  margin: 0;
+  padding: 1rem;
+}
+
+.App nav li {
+  list-style: none;
+  font-weight: 700;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10rem;
+}
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.tasklists-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.expanded-tasklist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  text-decoration: none;
+  border: 0.1rem solid;
+  padding: 1rem;
+}
+
+.expanded-task ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tasks-container ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks-container li {
+  cursor: pointer;
+  list-style: none;
+  border-bottom: 1px solid;
+  margin-bottom: 1rem;
+}
+
+.task-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.task-name {
+  align-self: flex-start;
+  flex-grow: 1;
+}
+
+.task-info {
+  text-align: center;
+}
+
+.tasklist-close-icon {
+  align-self: flex-end;
+}
+
+.tasklist-header,
+.task-header {
+  display: flex;
+  flex-direction: row;
+  gap: 10rem;
+}
+
+.edit-delete-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.export-json-button {
+  align-self: flex-end;
+  margin-top: 3rem;
+}
+
+.expanded-task {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid;
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-details p {
+  display: flex;
+  gap: 1rem;
+}
+
+.above-task-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: flex-start;
+  gap: 10rem;
+}
+
+/* Add Task Form*/
+
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-form-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-form-details {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
