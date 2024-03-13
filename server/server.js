@@ -5,6 +5,7 @@ const cors = require('cors'); // Necessary for localhost
 const app = express(); // Creates an express application in app
 const db = require('./config/mongodb'); // database connection
 const middleware = require('./utils/middleware');
+const tasksRouter = require('./routers/tasks');
 
 // Initial application setup
 app.use(cors()); // to connect to a localhost later
@@ -15,6 +16,14 @@ db.createConnection();
 
 // Adding middleware
 app.use(middleware.logger);
+
+// Adding routers
+app.use('/api/tasks/', tasksRouter); // Add tasks route
+
+// Testing endpoint connection
+app.get('/', (request, response) => {
+  response.status(201).send('Hello World!');
+});
 
 // Connect with DB, start server, and listen to server
 const PORT = process.env.PORT;
