@@ -7,6 +7,7 @@ const db = require('./config/mongodb'); // database connection
 const middleware = require('./utils/middleware');
 const tasksRouter = require('./routers/tasks');
 const tasklistsRouter = require('./routers/tasklists');
+const usersRouter = require('./routers/users');
 
 // Initial application setup
 app.use(cors()); // to connect to a localhost later
@@ -21,7 +22,7 @@ app.use(middleware.logger);
 // Adding routers
 app.use('/api/tasks/', tasksRouter); // Add tasks router
 app.use('/api/tasklists/', tasklistsRouter); // Add taskslists router
-
+app.use('/api/users', usersRouter);
 // Testing endpoint connection
 app.get('/', (request, response) => {
   response.status(201).send('Hello World!');

@@ -39,7 +39,6 @@ tasklistsRouter.get('/:id', async (request, response) => {
 });
 
 //------------------POST Endpoint----------------------//
-
 tasklistsRouter.post('/', async (request, response) => {
   try {
     // Get data from request body
@@ -64,7 +63,6 @@ tasklistsRouter.post('/', async (request, response) => {
 });
 
 //------------------PUT:id Endpoint------------------------//
-
 tasklistsRouter.put('/:id', async (request, response) => {
   try {
     const taskListId = request.params.id; // Get task id
@@ -72,7 +70,7 @@ tasklistsRouter.put('/:id', async (request, response) => {
 
     const taskListToUpdate = await TaskList.findById(taskListId); // Check if task existed
     if (!taskListToUpdate) {
-      return response.status(400).json({ error: 'No Task not found' });
+      return response.status(400).json({ error: 'Task not found' });
     }
 
     await TaskList.findByIdAndUpdate(taskListId, updatedTaskListDetails); // Update task with the new details
@@ -86,9 +84,6 @@ tasklistsRouter.put('/:id', async (request, response) => {
 });
 
 //------------------DELETE:id Endpoint----------------------//
-//   The :id required is the id of the FRUIT we want to delete
-//  * You should pass the basket id in the request body
-
 tasklistsRouter.delete('/:id', async (request, response) => {
   try {
     // Get id
