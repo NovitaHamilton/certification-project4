@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import LoginForm from './components/loginForm';
+import Login from './components/login/Login';
 
 /**
  * Importing other components
  */
 import Home from './components/Home';
-import ExpandedTaskList from './components/ExpandedTaskList';
+import ExpandedTaskList from './components/tasklist/ExpandedTaskList';
 
 const App = () => {
   const [user, setUser] = useState({ name: 'Novita C' });
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <LoginForm user={user} />
+        <Login user={user} />
         {user ? (
           <div>
             <nav>

@@ -3,11 +3,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import SourceIcon from '@mui/icons-material/Source';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import FlagIcon from '@mui/icons-material/Flag';
-import { statusOptions, priorityOptions } from '../../data/TaskFormOptions';
-import Button from './common/Button';
+import { statusOptions, priorityOptions } from '../../../data/TaskFormOptions';
+import Button from '../common/Button';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, editTask } from '../reducers/tasklistsReducer';
+import { addTask, editTask } from '../../reducers/tasklistsReducer';
 
 function TaskForm({
   tasklist,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './common/Button';
+import Button from '../common/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,7 +8,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import FlagIcon from '@mui/icons-material/Flag';
 import TaskForm from './TaskForm';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from '../reducers/tasklistsReducer';
+import { deleteTask } from '../../reducers/tasklistsReducer';
 
 function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
   const [isTaskEditing, setIsTaskEditing] = useState(false);

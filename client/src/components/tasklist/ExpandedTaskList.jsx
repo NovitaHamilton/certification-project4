@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Task from './Task';
-import Button from './common/Button';
+import Task from '../task/Task';
+import Button from '../common/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
-import ExpandedTask from './ExpandedTask';
-import TaskForm from './TaskForm';
-import { editTaskList, deleteTaskList } from '../reducers/tasklistsReducer';
+import ExpandedTask from '../task/ExpandedTask';
+import TaskForm from '../task/TaskForm';
+import { editTaskList, deleteTaskList } from '../../reducers/tasklistsReducer';
 import { useSelector, useDispatch } from 'react-redux';
 
 function ExpandedTaskList() {
