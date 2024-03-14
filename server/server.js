@@ -6,6 +6,7 @@ const app = express(); // Creates an express application in app
 const db = require('./config/mongodb'); // database connection
 const middleware = require('./utils/middleware');
 const tasksRouter = require('./routers/tasks');
+const tasklistsRouter = require('./routers/tasklists');
 
 // Initial application setup
 app.use(cors()); // to connect to a localhost later
@@ -18,7 +19,8 @@ db.createConnection();
 app.use(middleware.logger);
 
 // Adding routers
-app.use('/api/tasks/', tasksRouter); // Add tasks route
+app.use('/api/tasks/', tasksRouter); // Add tasks router
+app.use('/api/tasklists/', tasklistsRouter); // Add taskslists router
 
 // Testing endpoint connection
 app.get('/', (request, response) => {

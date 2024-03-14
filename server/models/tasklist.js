@@ -14,9 +14,9 @@ const tasklistSchema = new mongoose.Schema({
 // To transform the format of the object returned by schema into specific format defined here
 tasklistSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject.id.toString(); // store ojectId and format it into String
+    returnedObject.id = returnedObject._id.toString(); // store ojectId and format it into String
     delete returnedObject._id;
-    delete returnedObject._v;
+    delete returnedObject.__v;
   },
 });
 

@@ -7,7 +7,7 @@ const tasksRouter = express.Router(); //creates a new router object using the Ro
 //-----------------GET Endpoint--------------------------//
 tasksRouter.get('/', async (request, response) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find({});
     response.status(200).json(tasks);
   } catch (error) {
     console.error(error);
@@ -18,7 +18,7 @@ tasksRouter.get('/', async (request, response) => {
 //---------------------GET:id Endpoint--------------//
 tasksRouter.get('/:id', async (request, response) => {
   try {
-    const id = Number(request.params.id); // capture the id of the request
+    const id = request.params.id; // capture the id of the request
 
     const task = await Task.findById(id); // To find task by its id
     // Check if task was found
@@ -33,7 +33,7 @@ tasksRouter.get('/:id', async (request, response) => {
 });
 
 //------------------POST:id Endpoint----------------------//
-// @receives a POST request to /:id. The :id required is of the Task List where the Task is belong to
+// POST request to /:id. The :id required is of the Task List where the Task is belong to
 
 tasksRouter.post('/:id', async (request, response) => {
   console.log('Request Body:', request.body);
@@ -60,7 +60,28 @@ tasksRouter.post('/:id', async (request, response) => {
     taskList.tasks = taskList.tasks.concat(savedTask._id); // adding the newTask id to the tasks array
     await taskList.save();
     // Response with newly created task
-    response.status(201).json({ newTask });
+    response.status(201).json({ savedTask });
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+//------------------PUT:id Endpoint------------------------//
+tasksRouter.put('/:id', async (request, response) => {
+  try {
+    const taskId = request.params.id; // Get task id
+    const updatedTaskDetails = request.body; // Get the updatedTask details
+
+    const taskToUpdate = await Task.findById(taskId); // Check if task existed
+    if (!taskToUpdate) {
+      return response.status(400).json({ error: 'No Task not found' });
+    }
+
+    await Task.findByIdAndUpdate(taskId, updatedTaskDetails); // Update task with the new details
+
+    const updatedTask = await Task.findById(taskId); // Fetch the updated task from the database
+    response.status(200).json(updatedTask);
   } catch (error) {
     console.error(error);
     response.status(500).json({ error: 'Internal server error' });
@@ -68,27 +89,33 @@ tasksRouter.post('/:id', async (request, response) => {
 });
 
 //------------------DELETE:id Endpoint----------------------//
-//   The :id required is the id of the FRUIT we want to delete
-//  * You should pass the basket id in the request body
 
 tasksRouter.delete('/:id', async (request, response) => {
-  // Get id
-  const taskId = request.params.id;
-  const { taskListId } = request.body;
+  try {
+    // Get id
+    const taskId = request.params.id;
+    const { taskListId } = request.body;
 
-  // Check if Task List exist
-  const taskList = await TaskList.findById(taskListId);
-  if (!taskList) {
-    return response
-      .status(400)
-      .json({ error: 'Task List not found to remove task from' });
+    // Check if Task List exist
+    const taskList = await TaskList.findById(taskListId);
+    if (!taskList) {
+      return response
+        .status(400)
+        .json({ error: 'Task List not found to remove task from' });
+    }
+
+    // Remove the task and it's reference to the Task List
+    const taskToDelete = await Task.findByIdAndDelete(taskId);
+    if (!taskToDelete) {
+      return response.status(400).json({ error: 'Task not found' });
+    }
+    taskList.tasks = taskList.tasks.filter((id) => id.toJSON() !== taskId);
+    await taskList.save();
+    response.status(204).json(`Task is deleted`);
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({ error: 'Internal server error' });
   }
-
-  // Remove the task and it's reference to the Task List
-  await Task.findByIdAndDelete(taskId);
-  taskList.tasks = taskList.tasks.filter((id) => id.toJSON() !== taskId);
-  await taskList.save();
-  response.status(204).json();
 });
 
 module.exports = tasksRouter;

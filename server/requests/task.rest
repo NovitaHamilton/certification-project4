@@ -1,0 +1,18 @@
+
+# GET http://localhost:3001/api/tasklists
+
+
+# DELETE http://localhost:3001/api/tasks/65f24ea390c11694fcf3fdb3
+# Content-Type: application/json
+
+# {
+#     "taskListId": "65f24c024efe5b50b4431507"
+# }
+
+PUT http://localhost:3001/api/tasklists/65f24bfc4efe5b50b4431505
+Content-Type: application/json
+
+{
+    "name": "Test task list1 - Updated",
+    "tasks": []
+}
