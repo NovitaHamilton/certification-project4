@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 function TaskLists() {
   const tasklists = useSelector((store) => store.tasklists);
-  console.log(tasklists);
 
   return (
     <div className="task-lists">

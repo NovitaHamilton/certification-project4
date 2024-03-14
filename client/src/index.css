@@ -22,6 +22,12 @@ svg {
   font-weight: 700;
 }
 
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .main-page {
   display: flex;
   flex-direction: row;
@@ -153,5 +159,29 @@ svg {
 .task-form-details {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
+}
+
+/*----------Login Form------*/
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-signup-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logged-in {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 1rem;
 }
