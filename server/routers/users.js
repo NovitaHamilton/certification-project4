@@ -6,6 +6,7 @@ const User = require('../models/user'); // import User model
 
 const usersRouter = express.Router();
 
+// Endpoint to test connection
 usersRouter.get('/about', async (request, response) => {
   response.json({
     message: 'First Users Endpoint',
@@ -79,7 +80,7 @@ usersRouter.put('/:id', async (request, response) => {
 
     const userToUpdate = await User.findById(userId); // Check if user existed
     if (!userToUpdate) {
-      return response.status(400).json({ error: 'User not found' });
+      return response.status(404).json({ error: 'User not found' });
     }
 
     await User.findByIdAndUpdate(userId, updatedUserDetails); // Update user with the new details
@@ -101,7 +102,7 @@ usersRouter.delete('/:id', async (request, response) => {
     // Check if user exist
     const user = await User.findById(userId);
     if (!user) {
-      return response.status(400).json({ error: 'User not found' });
+      return response.status(404).json({ error: 'User not found' });
     }
 
     // Get all the data need to be deleted (tasklists and tasks that belongs to the user)
@@ -110,8 +111,8 @@ usersRouter.delete('/:id', async (request, response) => {
       tasklistIds.map((tasklistId) => TaskList.findById(tasklistId))
     );
 
-    const tasksIds = tasklists.map((taskList) => taskList.tasks); // Get the tasks value (array of objectIds) inside each Task List, which will resulted in objects of arrays at the end, after the map iteration
-    const flattenedTaskIds = tasksIds.flat().map((taskId) => taskId.toJSON()); // Flatten the tasks (objects of arrays) into an object with the values from all the arrays and convert it to JSON format
+    const taskIds = tasklists.map((taskList) => taskList.tasks); // Get the tasks value (array of objectIds) inside each Task List, which will resulted in objects of arrays at the end, after the map iteration
+    const flattenedTaskIds = taskIds.flat().map((taskId) => taskId.toJSON()); // Flatten the tasks (objects of arrays) into an object with the values from all the arrays and convert it to JSON format
 
     // Perform deletions to user, tasklists, & tasks
     await User.findByIdAndDelete(userId);
@@ -122,7 +123,7 @@ usersRouter.delete('/:id', async (request, response) => {
       flattenedTaskIds.map((taskId) => Task.findByIdAndDelete(taskId))
     );
 
-    response.status(204).json();
+    response.status(204).end();
   } catch (error) {
     console.error(error);
     response.status(500).json({ error: 'Internal server error' });

@@ -1,4 +1,4 @@
-# GET http://localhost:3001/api/users/
+GET http://localhost:3001/api/users/
 
 # GET http://localhost:3001/api/users/65f3347f5566003d35da8463
 
@@ -8,11 +8,10 @@
 
 
 
-PUT http://localhost:3001/api/users/65f3331e7c52b57424727154
-Content-Type: application/json
+# POST http://localhost:3001/api/users/
+# Content-Type: application/json
 
-{
-    "name": "Gavin Hamilton",
-    "id": "65f3331e7c52b57424727154",
-    "tasklists": []
-}
+# {
+#     "name": "Novita Hamilton",
+#     "password": "user123"
+# }

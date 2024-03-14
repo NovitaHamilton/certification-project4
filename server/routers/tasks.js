@@ -4,6 +4,13 @@ const TaskList = require('../models/tasklist'); // import the TaskList model
 
 const tasksRouter = express.Router(); //creates a new router object using the Router() function provided by the Express module and assigns it to the taskRouter variable. This router object can then be used to define routes and middleware specific to the /api/... endpoint
 
+// Endpoint to test connection
+tasksRouter.get('/about', async (request, response) => {
+  response.json({
+    message: 'First TaskList Endpoint',
+  });
+});
+
 //-----------------GET Endpoint--------------------------//
 tasksRouter.get('/', async (request, response) => {
   try {
@@ -51,7 +58,7 @@ tasksRouter.post('/:id', async (request, response) => {
     // Get Task List
     const taskList = await TaskList.findById(taskListId);
     if (!taskList) {
-      return response.status(400).json({ error: 'Task List not found' });
+      return response.status(404).json({ error: 'Task List not found' });
     }
     // Create a new task record and save it
     const newTask = new Task(content);
@@ -75,7 +82,7 @@ tasksRouter.put('/:id', async (request, response) => {
 
     const taskToUpdate = await Task.findById(taskId); // Check if task existed
     if (!taskToUpdate) {
-      return response.status(400).json({ error: 'No Task not found' });
+      return response.status(404).json({ error: 'Task not found' });
     }
 
     await Task.findByIdAndUpdate(taskId, updatedTaskDetails); // Update task with the new details
@@ -100,18 +107,18 @@ tasksRouter.delete('/:id', async (request, response) => {
     const taskList = await TaskList.findById(taskListId);
     if (!taskList) {
       return response
-        .status(400)
+        .status(404)
         .json({ error: 'Task List not found to remove task from' });
     }
 
     // Remove the task and it's reference to the Task List
     const taskToDelete = await Task.findByIdAndDelete(taskId);
     if (!taskToDelete) {
-      return response.status(400).json({ error: 'Task not found' });
+      return response.status(404).json({ error: 'Task not found' });
     }
     taskList.tasks = taskList.tasks.filter((id) => id.toJSON() !== taskId);
     await taskList.save();
-    response.status(204).json(`Task is deleted`);
+    response.status(204).end();
   } catch (error) {
     console.error(error);
     response.status(500).json({ error: 'Internal server error' });

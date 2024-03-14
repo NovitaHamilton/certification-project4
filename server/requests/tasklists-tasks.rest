@@ -1,0 +1,22 @@
+
+DELETE http://localhost:3001/api/tasklists/65f34feec3ce9a3cf1e443cd
+Content-Type: application/json
+
+{
+    "userId": "65f3331e7c52b57424727154"
+}
+
+
+# DELETE http://localhost:3001/api/tasks/65f24ea390c11694fcf3fdb3
+# Content-Type: application/json
+
+# {
+#     "taskListId": "65f24c024efe5b50b4431507"
+# }
+
+# POST http://localhost:3001/api/tasklists/65f3331e7c52b57424727154
+# Content-Type: application/json
+
+# {
+#     "name": "Test task list1"
+# }

@@ -8,6 +8,7 @@ const middleware = require('./utils/middleware');
 const tasksRouter = require('./routers/tasks');
 const tasklistsRouter = require('./routers/tasklists');
 const usersRouter = require('./routers/users');
+const loginRouter = require('./routers/login');
 
 // Initial application setup
 app.use(cors()); // to connect to a localhost later
@@ -23,6 +24,8 @@ app.use(middleware.logger);
 app.use('/api/tasks/', tasksRouter); // Add tasks router
 app.use('/api/tasklists/', tasklistsRouter); // Add taskslists router
 app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
+
 // Testing endpoint connection
 app.get('/', (request, response) => {
   response.status(201).send('Hello World!');
