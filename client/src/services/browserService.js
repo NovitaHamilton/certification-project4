@@ -7,7 +7,7 @@ const storeUser = (user) => {
 const getUser = () => {
   return JSON.parse(localStorage.getItem('user'));
 };
-const removeUser = () => {
+const removeUser = (user) => {
   return localStorage.removeItem(user);
 };
 
