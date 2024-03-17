@@ -1,10 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '../common/Button';
 import LoginForm from './LoginForm';
+import { logoutUser } from '../../reducers/userReducer';
 
 function Login() {
   const user = useSelector((store) => store.user);
-  const handleLogout = () => {};
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUser());
+  };
+
   return (
     <div>
       {user ? (

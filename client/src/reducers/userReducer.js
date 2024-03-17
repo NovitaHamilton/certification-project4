@@ -12,11 +12,14 @@ const userSlice = createSlice({
     setUser(state, action) {
       return action.payload;
     },
+    logoutUser(state, action) {
+      return null;
+    },
   },
 });
 
 // Export actions
-export const { setUser } = userSlice.actions;
+export const { setUser, logoutUser } = userSlice.actions;
 
 // Redux-thunk action to perform login and update store
 export const loginUser = (user) => {
@@ -33,8 +36,6 @@ export const createUser = (user) => {
     dispatch(setUser(newUser));
   };
 };
-
-// // Redux-thunk action to perform logout
 
 // Export reducers
 export default userSlice.reducer;
