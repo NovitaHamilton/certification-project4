@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import login from '../services/loginService';
+import { addUser } from '../services/userService';
 
 const initialState = null;
 
@@ -25,7 +26,15 @@ export const loginUser = (user) => {
   };
 };
 
-// export const loginUser = createAsyncThunk('');
+// Redux-thunk action to perform create new user
+export const createUser = (user) => {
+  return async (dispatch) => {
+    const newUser = await addUser(user);
+    dispatch(setUser(newUser));
+  };
+};
+
+// // Redux-thunk action to perform logout
 
 // Export reducers
 export default userSlice.reducer;

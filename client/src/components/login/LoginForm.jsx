@@ -1,7 +1,7 @@
 import Button from '../common/Button';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { loginUser } from '../../reducers/userReducer';
+import { loginUser, createUser } from '../../reducers/userReducer';
 
 function LoginForm() {
   const [formInput, setFormInput] = useState({
@@ -19,13 +19,16 @@ function LoginForm() {
   };
 
   const handleSubmit = (action) => {
-    const user = formInput;
     // Distinguish button click
     if (action === 'login') {
-      dispatch(loginUser(user));
+      dispatch(loginUser(formInput));
     } else {
-      console.log('Create new user');
+      dispatch(createUser(formInput));
     }
+    setFormInput({
+      name: '',
+      password: '',
+    });
   };
 
   return (

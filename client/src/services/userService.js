@@ -50,10 +50,4 @@ const deleteUser = async (userId) => {
     throw error;
   }
 };
-export default {
-  getUsers,
-  getUser,
-  addUser,
-  updateUser,
-  deleteUser,
-};
+export { getUsers, getUser, addUser, updateUser, deleteUser };
