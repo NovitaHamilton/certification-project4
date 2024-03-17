@@ -7,11 +7,6 @@ function Login() {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    dispatch(logoutUser());
-  };
-
   return (
     <div>
       {user ? (
@@ -19,7 +14,7 @@ function Login() {
           <p>
             <strong>{user.name}</strong> is logged in
           </p>
-          <Button onClick={handleLogout}>Log out</Button>
+          <Button onClick={() => dispatch(logoutUser())}>Log out</Button>
         </div>
       ) : (
         <LoginForm />

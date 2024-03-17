@@ -11,4 +11,4 @@ const removeUser = () => {
   return localStorage.removeItem(user);
 };
 
-export default { storeUser, getUser, removeUser };
+export { storeUser, getUser, removeUser };

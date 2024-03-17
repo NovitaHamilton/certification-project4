@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Login from './components/login/Login';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { pageLoad } from './reducers/userReducer';
 
 /**
  * Importing other components
@@ -11,6 +12,12 @@ import ExpandedTaskList from './components/tasklist/ExpandedTaskList';
 
 const App = () => {
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  // Perform localStorage check on first load (auto-login)
+  useEffect(() => {
+    dispatch(pageLoad());
+  }, []);
 
   return (
     <div className="App">
