@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Button from '../common/Button';
 import LoginForm from './LoginForm';
 
-function Login({ user }) {
+function Login() {
+  const user = useSelector((store) => store.user);
   const handleLogout = () => {};
   return (
     <div>

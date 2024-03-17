@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Login from './components/login/Login';
+import { useSelector } from 'react-redux';
 
 /**
  * Importing other components
@@ -9,12 +10,12 @@ import Home from './components/Home';
 import ExpandedTaskList from './components/tasklist/ExpandedTaskList';
 
 const App = () => {
-  const [user, setUser] = useState({ name: 'Novita C' });
+  const user = useSelector((store) => store.user);
 
   return (
     <div className="App">
       <Router>
-        <Login user={user} />
+        <Login />
         {user ? (
           <div>
             <nav>
