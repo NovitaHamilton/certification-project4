@@ -7,8 +7,8 @@ const storeUser = (user) => {
 const getUser = () => {
   return JSON.parse(localStorage.getItem('user'));
 };
-const removeUser = (user) => {
-  return localStorage.removeItem(user);
+const removeUser = () => {
+  return localStorage.removeItem('user');
 };
 
 export { storeUser, getUser, removeUser };

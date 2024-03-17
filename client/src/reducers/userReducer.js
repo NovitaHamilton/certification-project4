@@ -42,7 +42,7 @@ export const createUser = (user) => {
 // Redux-thunk action to perform logout
 export const logoutUser = (user) => {
   return async (dispatch) => {
-    removeUser(user);
+    removeUser();
     dispatch(emptyUser());
   };
 };
