@@ -3,26 +3,22 @@ import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Button from './common/Button';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addTaskList, loadLocalStorage } from '../reducers/tasklistsReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTasklist, loadLocalStorage } from '../reducers/tasklistsReducer';
 
 function Home() {
-  // To access global state
-  // const tasklists = useSelector((store) => store.tasklists);
-  // To access dispatch() function
-  const dispatch = useDispatch();
-  // To access navigate function
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); // To access dispatch() function
+  const navigate = useNavigate(); // To access navigate function
+  const user = useSelector((store) => store.user); // To access 'user' state in Redux store
 
-  const handleAddTaskList = (e) => {
+  const handleAddTaskList = async (e) => {
     e.preventDefault();
     const newTaskList = {
-      id: uuidv4(),
       name: 'New Task List',
       tasks: [],
     };
-    dispatch(addTaskList(newTaskList));
-    navigate(`/tasklists/${newTaskList.id}`); // to navigate to the newTaskList route
+    const savedTaskList = await dispatch(addTasklist(user.id, newTaskList));
+    navigate(`/tasklists/${savedTaskList.id}`); // to navigate to the newly created Task List route
   };
 
   const handleLoadLocalStorage = (e) => {

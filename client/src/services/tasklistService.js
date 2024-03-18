@@ -54,7 +54,7 @@ const deleteTaskList = async (taskListId, userId) => {
   }
 };
 
-export default {
+export {
   getTaskLists,
   getTaskList,
   addTaskList,

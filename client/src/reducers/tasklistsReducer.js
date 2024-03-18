@@ -1,66 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addTaskList } from '../services/tasklistService';
 
-const initialState = [
-  {
-    id: '1',
-    name: 'Certification Project 4 - CIC',
-    tasks: [
-      {
-        id: '1',
-        name: 'Create Wireframe',
-        priority: 'Medium',
-        dueDate: '2024-03-05',
-        status: 'Completed',
-      },
-      {
-        id: '2',
-        name: 'Create Flow Chart',
-        priority: 'Medium',
-        dueDate: '2024-03-05',
-        status: 'Completed',
-      },
-      {
-        id: '3',
-        name: 'Create Component Tree',
-        priority: 'Medium',
-        dueDate: '2024-03-06',
-        status: 'In progress',
-      },
-    ],
-  },
-  {
-    id: '2',
-    name: 'Miniproject',
-    tasks: [
-      {
-        id: '1',
-        name: 'Part 1',
-        priority: 'Medium',
-        dueDate: '2024-03-01',
-        status: 'Completed',
-      },
-      {
-        id: '2',
-        name: 'Part 2',
-        priority: 'Medium',
-        dueDate: '2024-03-01',
-        status: 'Completed',
-      },
-    ],
-  },
-];
+const initialState = [];
 
 const tasklistsSlice = createSlice({
   name: 'tasklists',
   initialState,
   reducers: {
-    addTaskList(state, action) {
-      state.push(action.payload); // Add the new task list to the state
+    setCase(state, action) {
+      return action.payload;
     },
-    editTaskList(state, action) {
-      console.log('Action Type:', action.type);
-      console.log('Action Payload:', action.payload);
-
+    addCase(state, action) {
+      state.push(action.payload);
+    },
+    editCase(state, action) {
       // initially used the destructuring method below (same with the other reducers) but for some reason it's causing issue, taskListId becomes undefined. Worked around it by accessing the value directly from action.payload
       // const { taskListId, newTask } = action.payload;
       return state.map((tasklist) => {
@@ -70,44 +23,8 @@ const tasklistsSlice = createSlice({
         return tasklist;
       });
     },
-    deleteTaskList(state, action) {
+    deleteCase(state, action) {
       return state.filter((tasklist) => tasklist.id !== action.payload);
-    },
-
-    addTask(state, action) {
-      const { taskListId, newTask } = action.payload;
-      const taskListToUpdate = state.find(
-        (tasklist) => tasklist.id === taskListId
-      );
-      if (taskListToUpdate) {
-        taskListToUpdate.tasks.push(newTask);
-      }
-    },
-    editTask(state, action) {
-      const { taskListId, newTask } = action.payload;
-      return state.map((tasklist) => {
-        if (tasklist.id === taskListId) {
-          return {
-            ...tasklist,
-            tasks: tasklist.tasks.map((task) =>
-              task.id === newTask.id ? newTask : task
-            ),
-          };
-        }
-        return tasklist;
-      });
-    },
-
-    deleteTask(state, action) {
-      const { taskListId, taskId } = action.payload;
-      const taskListToUpdate = state.find(
-        (tasklist) => tasklist.id === taskListId
-      );
-      if (taskListToUpdate) {
-        taskListToUpdate.tasks = taskListToUpdate.tasks.filter(
-          (task) => task.id !== taskId
-        );
-      }
     },
     loadLocalStorage(state, action) {
       return action.payload;
@@ -116,15 +33,16 @@ const tasklistsSlice = createSlice({
 });
 
 // Export actions
-export const {
-  addTaskList,
-  editTaskList,
-  deleteTaskList,
-  addTask,
-  editTask,
-  deleteTask,
-  loadLocalStorage,
-} = tasklistsSlice.actions;
+export const { setCase, editCase, deleteCase, loadLocalStorage, addCase } =
+  tasklistsSlice.actions;
+
+export const addTasklist = (userId, taskList) => {
+  return async (dispatch) => {
+    const newTaskList = await addTaskList(userId, taskList);
+    dispatch(addCase(newTaskList));
+    return newTaskList;
+  };
+};
 
 // Export reducers
 export default tasklistsSlice.reducer;

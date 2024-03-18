@@ -7,7 +7,7 @@ import { statusOptions, priorityOptions } from '../../../data/TaskFormOptions';
 import Button from '../common/Button';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, editTask } from '../../reducers/tasklistsReducer';
+import { addTask, editTask } from '../../reducers/tasksReducer';
 
 function TaskForm({
   tasklist,
