@@ -1,15 +1,28 @@
 import TaskLists from './tasklist/TaskLists';
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect } from 'react';
 import Button from './common/Button';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTasklist, loadLocalStorage } from '../reducers/tasklistsReducer';
+import {
+  setCase,
+  addTasklist,
+  initTaskList,
+  loadLocalStorage,
+} from '../reducers/tasklistsReducer';
 
 function Home() {
   const dispatch = useDispatch(); // To access dispatch() function
   const navigate = useNavigate(); // To access navigate function
   const user = useSelector((store) => store.user); // To access 'user' state in Redux store
+
+  // Initializes Task Lists if user is logged in
+  useEffect(() => {
+    if (user) {
+      dispatch(initTaskList(user.id));
+    } else {
+      dispatch(setCase([]));
+    }
+  }, [user]);
 
   const handleAddTaskList = async (e) => {
     e.preventDefault();

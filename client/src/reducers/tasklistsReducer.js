@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTaskList } from '../services/tasklistService';
+import { addTaskList, getTaskList } from '../services/tasklistService';
+import { getUser } from '../services/userService';
 
 const initialState = [];
 
@@ -36,6 +37,20 @@ const tasklistsSlice = createSlice({
 export const { setCase, editCase, deleteCase, loadLocalStorage, addCase } =
   tasklistsSlice.actions;
 
+// Redux-thunk action that initializes baskets (on login)
+export const initTaskList = (userId) => {
+  return async (dispatch) => {
+    const taskListIds = (await getUser(userId)).tasklists;
+    console.log(taskListIds);
+    const tasklists = await Promise.all(
+      taskListIds.map((taskListId) => getTaskList(taskListId))
+    );
+    console.log('returned tasklist:', tasklists);
+    dispatch(setCase(tasklists));
+  };
+};
+
+// Redux-thunk action to add new task list
 export const addTasklist = (userId, taskList) => {
   return async (dispatch) => {
     const newTaskList = await addTaskList(userId, taskList);
