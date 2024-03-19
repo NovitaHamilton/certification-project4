@@ -76,16 +76,25 @@ tasklistsRouter.post('/:id', async (request, response) => {
 tasklistsRouter.put('/:id', async (request, response) => {
   try {
     const taskListId = request.params.id; // Get task id
-    const updatedTaskListDetails = request.body; // Get the updatedTask details
+    // const taskListToUpdate = await TaskList.findById(taskListId); // Check if task existed
+    console.log('TasklistID:', taskListId);
 
-    const taskListToUpdate = await TaskList.findById(taskListId); // Check if task existed
-    if (!taskListToUpdate) {
-      return response.status(404).json({ error: 'Task not found' });
+    const { name } = request.body; // Get the updatedTask details
+    console.log('Edited name:', name);
+    if (!name) {
+      return response.status(404).json({ error: 'Missing required input' });
     }
 
-    await TaskList.findByIdAndUpdate(taskListId, updatedTaskListDetails); // Update task with the new details
+    const updatedTaskList = await TaskList.findByIdAndUpdate(
+      taskListId,
+      { name }, // Update task list name
+      { new: true } // return new task list
+    );
+    if (!updatedTaskList) {
+      return response.status(404).json({ error: 'Task List not found' });
+    }
 
-    const updatedTaskList = await TaskList.findById(taskListId); // Fetch the updated task from the database
+    // const updatedTaskList = await TaskList.findById(taskListId); // Fetch the updated task from the database
     response.status(200).json(updatedTaskList);
   } catch (error) {
     console.error(error);

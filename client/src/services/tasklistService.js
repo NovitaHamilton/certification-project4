@@ -31,12 +31,11 @@ const addTaskList = async (userId, newTaskList) => {
   }
 };
 
-const updateTaskList = async (taskListId, updatedTaskList) => {
+const updateTaskList = async (taskListId, editedName) => {
   try {
-    const response = await axios.post(
-      `${baseURL}/${taskListId}`,
-      updatedTaskList
-    );
+    const response = await axios.put(`${baseURL}/${taskListId}`, {
+      name: editedName,
+    });
     return response.data;
   } catch (error) {
     console.error('Error updating tasklist:', error);

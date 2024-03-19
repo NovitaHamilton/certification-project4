@@ -3,6 +3,7 @@ import {
   addTaskList,
   getTaskList,
   deleteTaskList,
+  updateTaskList,
 } from '../services/tasklistService';
 import { getUser } from '../services/userService';
 
@@ -23,7 +24,7 @@ const tasklistsSlice = createSlice({
       // const { taskListId, newTask } = action.payload;
       return state.map((tasklist) => {
         if (tasklist.id === action.payload.id) {
-          return { ...tasklist, name: action.payload.editedName };
+          return { ...tasklist, name: action.payload.name };
         }
         return tasklist;
       });
@@ -61,10 +62,17 @@ export const addTasklist = (userId, taskList) => {
   };
 };
 
+// Redux-thunk action to edit task list
+export const editTasklist = (taskListId, editedName) => {
+  console.log(editedName);
+  return async (dispatch) => {
+    const updatedTaskList = await updateTaskList(taskListId, editedName);
+    dispatch(editCase(updatedTaskList));
+  };
+};
+
 // Redux-thunk action to delete task list
 export const deleteTasklist = (userId, taskListId) => {
-  console.log('User Id:', userId);
-  console.log('taskListId', taskListId);
   return async (dispatch) => {
     await deleteTaskList(userId, taskListId);
     dispatch(deleteCase(taskListId));

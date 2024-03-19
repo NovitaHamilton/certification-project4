@@ -7,7 +7,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandedTask from '../task/ExpandedTask';
 import TaskForm from '../task/TaskForm';
-import { editCase, deleteTasklist } from '../../reducers/tasklistsReducer';
+import {
+  editCase,
+  deleteTasklist,
+  editTasklist,
+} from '../../reducers/tasklistsReducer';
 import { useSelector, useDispatch } from 'react-redux';
 
 function ExpandedTaskList() {
@@ -56,7 +60,7 @@ function ExpandedTaskList() {
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
-    dispatch(editCase({ id, editedName }));
+    dispatch(editTasklist(tasklist.id, editedName));
     setIsTasklistEditing(false);
   };
 
