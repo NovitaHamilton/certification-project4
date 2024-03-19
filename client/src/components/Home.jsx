@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setCase,
   addTasklist,
-  initTaskList,
+  initTaskLists,
   loadLocalStorage,
 } from '../reducers/tasklistsReducer';
 
@@ -18,7 +18,7 @@ function Home() {
   // Initializes Task Lists if user is logged in
   useEffect(() => {
     if (user) {
-      dispatch(initTaskList(user.id));
+      dispatch(initTaskLists(user.id));
     } else {
       dispatch(setCase([]));
     }

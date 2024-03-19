@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTaskList, getTaskList } from '../services/tasklistService';
+import {
+  addTaskList,
+  getTaskList,
+  deleteTaskList,
+} from '../services/tasklistService';
 import { getUser } from '../services/userService';
 
 const initialState = [];
@@ -38,14 +42,12 @@ export const { setCase, editCase, deleteCase, loadLocalStorage, addCase } =
   tasklistsSlice.actions;
 
 // Redux-thunk action that initializes baskets (on login)
-export const initTaskList = (userId) => {
+export const initTaskLists = (userId) => {
   return async (dispatch) => {
     const taskListIds = (await getUser(userId)).tasklists;
-    console.log(taskListIds);
     const tasklists = await Promise.all(
       taskListIds.map((taskListId) => getTaskList(taskListId))
     );
-    console.log('returned tasklist:', tasklists);
     dispatch(setCase(tasklists));
   };
 };
@@ -56,6 +58,16 @@ export const addTasklist = (userId, taskList) => {
     const newTaskList = await addTaskList(userId, taskList);
     dispatch(addCase(newTaskList));
     return newTaskList;
+  };
+};
+
+// Redux-thunk action to delete task list
+export const deleteTasklist = (userId, taskListId) => {
+  console.log('User Id:', userId);
+  console.log('taskListId', taskListId);
+  return async (dispatch) => {
+    await deleteTaskList(userId, taskListId);
+    dispatch(deleteCase(taskListId));
   };
 };
 

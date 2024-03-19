@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandedTask from '../task/ExpandedTask';
 import TaskForm from '../task/TaskForm';
-import { editCase, deleteCase } from '../../reducers/tasklistsReducer';
+import { editCase, deleteTasklist } from '../../reducers/tasklistsReducer';
 import { useSelector, useDispatch } from 'react-redux';
 
 function ExpandedTaskList() {
@@ -21,6 +21,7 @@ function ExpandedTaskList() {
   const [isAddTaskFormOpen, setIsAddTaskFormOpen] = useState(false);
 
   const tasklists = useSelector((store) => store.tasklists);
+  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -43,7 +44,7 @@ function ExpandedTaskList() {
 
   const handleDeleteTaskList = (e) => {
     e.preventDefault();
-    dispatch(deleteCase(id));
+    dispatch(deleteTasklist(user.id, tasklist.id));
     navigateToTasksLists();
   };
 
@@ -55,7 +56,6 @@ function ExpandedTaskList() {
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
-    console.log('Action Payload:', { id, editedName });
     dispatch(editCase({ id, editedName }));
     setIsTasklistEditing(false);
   };
