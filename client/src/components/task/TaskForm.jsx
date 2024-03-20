@@ -7,7 +7,7 @@ import { statusOptions, priorityOptions } from '../../../data/TaskFormOptions';
 import Button from '../common/Button';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, editTask } from '../../reducers/tasksReducer';
+import { addTaskAction, editTask } from '../../reducers/tasksReducer';
 
 function TaskForm({
   tasklist,
@@ -42,7 +42,6 @@ function TaskForm({
   const handleSaveTask = (e) => {
     e.preventDefault();
     const newTask = {
-      id: taskToEdit ? taskToEdit.id : uuidv4(),
       name: formInput.name,
       dueDate: formInput.dueDate,
       status: formInput.status,
@@ -50,13 +49,12 @@ function TaskForm({
     };
 
     const taskListId = tasklist.id;
-    const taskId = newTask.id;
-    console.log(taskId);
 
     if (taskToEdit) {
-      dispatch(editTask({ taskListId, newTask }));
+      newTask.id = taskToEdit.id;
+      dispatch(editTask(taskListId, newTask));
     } else {
-      dispatch(addTask({ taskListId, newTask }));
+      dispatch(addTaskAction(taskListId, newTask));
     }
     // Reset formInput
     setFormInput({

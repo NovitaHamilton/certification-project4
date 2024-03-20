@@ -47,7 +47,7 @@ export const logoutUser = (user) => {
   };
 };
 
-// Redux-thunk action to perform page load
+// Redux-thunk action to perform page load and get user
 export const pageLoad = () => {
   return async (dispatch) => {
     const storedUser = await getUser();

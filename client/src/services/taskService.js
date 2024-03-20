@@ -51,10 +51,4 @@ const deleteTask = async (taskId, taskListId) => {
   }
 };
 
-export default {
-  getTasks,
-  getTask,
-  addTask,
-  updateTask,
-  deleteTask,
-};
+export { getTasks, getTask, addTask, updateTask, deleteTask };

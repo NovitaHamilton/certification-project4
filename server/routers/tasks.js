@@ -67,7 +67,7 @@ tasksRouter.post('/:id', async (request, response) => {
     taskList.tasks = taskList.tasks.concat(savedTask._id); // adding the newTask id to the tasks array
     await taskList.save();
     // Response with newly created task
-    response.status(201).json({ savedTask });
+    response.status(201).json(savedTask);
   } catch (error) {
     console.error(error);
     response.status(500).json({ error: 'Internal server error' });

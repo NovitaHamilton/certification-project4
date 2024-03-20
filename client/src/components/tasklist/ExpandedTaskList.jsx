@@ -13,6 +13,7 @@ import {
   editTasklist,
 } from '../../reducers/tasklistsReducer';
 import { useSelector, useDispatch } from 'react-redux';
+import { initTask, setCase } from '../../reducers/tasksReducer';
 
 function ExpandedTaskList() {
   // State to track whether Task List is in editing mode or not
@@ -25,6 +26,7 @@ function ExpandedTaskList() {
   const [isAddTaskFormOpen, setIsAddTaskFormOpen] = useState(false);
 
   const tasklists = useSelector((store) => store.tasklists);
+  const tasks = useSelector((store) => store.tasks);
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,8 +38,16 @@ function ExpandedTaskList() {
   }, [id]);
 
   // Find the task list with the specified ID
-
   const tasklist = tasklists.find((tasklist) => tasklist.id === id);
+
+  // Initialize tasks if tasklist is available
+  useEffect(() => {
+    if (tasklist) {
+      dispatch(initTask(tasklist.id));
+    } else {
+      dispatch(setCase([]));
+    }
+  }, [tasklist]);
 
   // onClick Functions
 
@@ -130,7 +140,7 @@ function ExpandedTaskList() {
       <div className="tasks-container">
         <ul>
           {/* Render tasks for the individual task list*/}
-          {tasklist.tasks.map((task) => (
+          {tasks.map((task) => (
             <li
               key={task.id}
               role="button"
