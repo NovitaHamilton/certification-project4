@@ -76,7 +76,7 @@ function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
         <TaskForm
           tasklist={tasklist}
           setIsTaskEditing={setIsTaskEditing}
-          taskToEdit={{ ...task, taskList: tasklist.name }}
+          taskToEdit={task}
         />
       )}
     </div>

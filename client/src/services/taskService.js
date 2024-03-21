@@ -31,9 +31,12 @@ const addTask = async (taskListId, newTask) => {
   }
 };
 
-const updateTask = async (taskId, updatedTask) => {
+const updateTask = async (updatedTask) => {
   try {
-    const response = await axios.post(`${baseURL}/${taskId}`, updatedTask);
+    const response = await axios.put(
+      `${baseURL}/${updatedTask.id}`,
+      updatedTask
+    );
     return response.data;
   } catch (error) {
     console.error('Error updating task:', error);

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import SourceIcon from '@mui/icons-material/Source';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import FlagIcon from '@mui/icons-material/Flag';
 import { statusOptions, priorityOptions } from '../../../data/TaskFormOptions';
 import Button from '../common/Button';
-import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTaskAction, editTask } from '../../reducers/tasksReducer';
+import { useDispatch } from 'react-redux';
+import { addTaskAction, editTaskAction } from '../../reducers/tasksReducer';
 
 function TaskForm({
   tasklist,
@@ -15,10 +15,10 @@ function TaskForm({
   taskToEdit,
   setIsTaskEditing,
 }) {
+  console.log('Task to Edit:', taskToEdit);
   const [formInput, setFormInput] = useState({
     name: '',
-    dueDate: '',
-    // taskList: tasklist.name,
+    dueDate: new Date(), // Default to current date
     status: '',
     priority: '',
   });
@@ -29,7 +29,14 @@ function TaskForm({
   // If there's taskToEdit detected, the form input will be populated by the taskToEdit object
   useEffect(() => {
     if (taskToEdit) {
-      setFormInput(taskToEdit);
+      // Convert the task's dueDate to a Date object
+      const dueDate = new Date(taskToEdit.dueDate);
+      // Set the time to 00:00:00 to ensure consistency
+      dueDate.setHours(0, 0, 0, 0);
+      setFormInput({
+        ...taskToEdit,
+        dueDate: dueDate,
+      });
     }
   }, [taskToEdit]);
 
@@ -41,6 +48,7 @@ function TaskForm({
 
   const handleSaveTask = (e) => {
     e.preventDefault();
+    // Format the due date
     const newTask = {
       name: formInput.name,
       dueDate: formInput.dueDate,
@@ -52,14 +60,14 @@ function TaskForm({
 
     if (taskToEdit) {
       newTask.id = taskToEdit.id;
-      dispatch(editTask(taskListId, newTask));
+      dispatch(editTaskAction(newTask));
     } else {
       dispatch(addTaskAction(taskListId, newTask));
     }
     // Reset formInput
     setFormInput({
       name: '',
-      dueDate: '',
+      dueDate: new Date(), // Default to current date
       taskList: '',
       status: '',
       priority: '',
@@ -92,13 +100,13 @@ function TaskForm({
           ></input>
           <label>
             Due date:
-            <input
+            <DatePicker
               name="dueDate"
-              type="date"
-              value={formInput.dueDate}
-              onChange={handleInputChange}
+              selected={formInput.dueDate}
+              onChange={(date) => setFormInput({ ...formInput, dueDate: date })}
+              dateFormat="eee, dd MMM yyyy"
               required
-            ></input>
+            />
           </label>
         </div>
         <CloseIcon className="close-icon" onClick={handleCloseTaskForm} />

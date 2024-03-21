@@ -15,17 +15,12 @@ const tasksSlice = createSlice({
       state.push(action.payload);
     },
     editCase(state, action) {
-      const { taskListId, newTask } = action.payload;
-      return state.map((tasklist) => {
-        if (tasklist.id === taskListId) {
-          return {
-            ...tasklist,
-            tasks: tasklist.tasks.map((task) =>
-              task.id === newTask.id ? newTask : task
-            ),
-          };
+      const updatedTask = action.payload;
+      return state.map((task) => {
+        if (task.id === updatedTask.id) {
+          return { ...task, ...updatedTask };
         }
-        return tasklist;
+        return task;
       });
     },
 
@@ -60,15 +55,14 @@ export const initTask = (taskListId) => {
 export const addTaskAction = (taskListId, task) => {
   return async (dispatch) => {
     const newTask = await addTask(taskListId, task);
-    console.log({ taskListId, newTask });
     dispatch(addCase(newTask));
   };
 };
 
-export const editTask = (taskListId, task) => {
+export const editTaskAction = (task) => {
   return async (dispatch) => {
-    const newTask = await updateTask(taskListId, task);
-    dispatch(editCase({ taskListId, newTask }));
+    const updatedTask = await updateTask(task);
+    dispatch(editCase(updatedTask));
   };
 };
 // Export reducers
