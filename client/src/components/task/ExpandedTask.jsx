@@ -8,7 +8,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import FlagIcon from '@mui/icons-material/Flag';
 import TaskForm from './TaskForm';
 import { useDispatch } from 'react-redux';
-import { deleteCase } from '../../reducers/tasksReducer';
+import { deleteTaskAction } from '../../reducers/tasksReducer';
 
 function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
   const [isTaskEditing, setIsTaskEditing] = useState(false);
@@ -34,7 +34,8 @@ function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
     e.preventDefault();
     const taskListId = tasklist.id;
     const taskId = task.id;
-    dispatch(deleteTask({ taskListId, taskId }));
+    console.log('From handleDeleteTask:', taskListId, taskId);
+    dispatch(deleteTaskAction(taskId, taskListId));
   };
 
   return (

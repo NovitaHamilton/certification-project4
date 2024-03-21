@@ -15,15 +15,6 @@ function Home() {
   const navigate = useNavigate(); // To access navigate function
   const user = useSelector((store) => store.user); // To access 'user' state in Redux store
 
-  // Initializes Task Lists if user is logged in
-  useEffect(() => {
-    if (user) {
-      dispatch(initTaskLists(user.id));
-    } else {
-      dispatch(setCase([]));
-    }
-  }, [user]);
-
   const handleAddTaskList = async (e) => {
     e.preventDefault();
     const newTaskList = {

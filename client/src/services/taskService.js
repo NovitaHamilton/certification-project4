@@ -46,7 +46,9 @@ const updateTask = async (updatedTask) => {
 
 const deleteTask = async (taskId, taskListId) => {
   try {
-    const response = await axios.post(`${baseURL}/${taskId}`, taskListId);
+    const response = await axios.delete(`${baseURL}/${taskListId}`, {
+      data: { taskId },
+    });
     return response.data;
   } catch (error) {
     console.error('Error deleting task:', error);

@@ -20,6 +20,15 @@ const App = () => {
     dispatch(pageLoad()); // Initialize user
   }, []);
 
+  // Initializes Task Lists if user is logged in
+  useEffect(() => {
+    if (user) {
+      dispatch(initTaskLists(user.id));
+    } else {
+      dispatch(setCase([]));
+    }
+  }, [user]);
+
   return (
     <div className="App">
       <Router>

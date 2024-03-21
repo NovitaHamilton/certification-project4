@@ -100,8 +100,8 @@ tasksRouter.put('/:id', async (request, response) => {
 tasksRouter.delete('/:id', async (request, response) => {
   try {
     // Get id
-    const taskId = request.params.id;
-    const { taskListId } = request.body;
+    const taskListId = request.params.id;
+    const { taskId } = request.body;
 
     // Check if Task List exist
     const taskList = await TaskList.findById(taskListId);

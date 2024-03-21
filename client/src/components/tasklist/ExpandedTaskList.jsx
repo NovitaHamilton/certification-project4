@@ -7,11 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandedTask from '../task/ExpandedTask';
 import TaskForm from '../task/TaskForm';
-import {
-  editCase,
-  deleteTasklist,
-  editTasklist,
-} from '../../reducers/tasklistsReducer';
+import { deleteTasklist, editTasklist } from '../../reducers/tasklistsReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { initTask, setCase } from '../../reducers/tasksReducer';
 

@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTask, updateTask, getTask } from '../services/taskService';
+import {
+  addTask,
+  updateTask,
+  getTask,
+  deleteTask,
+} from '../services/taskService';
 import { getTaskList } from '../services/tasklistService';
 
 const initialState = [];
@@ -25,15 +30,7 @@ const tasksSlice = createSlice({
     },
 
     deleteCase(state, action) {
-      const { taskListId, taskId } = action.payload;
-      const taskListToUpdate = state.find(
-        (tasklist) => tasklist.id === taskListId
-      );
-      if (taskListToUpdate) {
-        taskListToUpdate.tasks = taskListToUpdate.tasks.filter(
-          (task) => task.id !== taskId
-        );
-      }
+      return state.filter((task) => task.id !== action.payload);
     },
     loadLocalStorage(state, action) {
       return action.payload;
@@ -63,6 +60,14 @@ export const editTaskAction = (task) => {
   return async (dispatch) => {
     const updatedTask = await updateTask(task);
     dispatch(editCase(updatedTask));
+  };
+};
+
+export const deleteTaskAction = (taskId, taskListId) => {
+  console.log('From deleteTaskAction:', taskListId, taskId);
+  return async (dispatch) => {
+    await deleteTask(taskId, taskListId);
+    dispatch(deleteCase(taskId));
   };
 };
 // Export reducers
