@@ -24,7 +24,7 @@ const userSlice = createSlice({
 });
 
 // Export actions
-export const { setUser, emptyUser } = userSlice.actions;
+export const { setUser, clearUser } = userSlice.actions;
 
 // Redux-thunk action to perform login and update store
 export const loginUser = (user) => {
