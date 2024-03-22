@@ -4,11 +4,11 @@ const storeUser = (user) => {
   localStorage.setItem('user', JSON.stringify(user));
 };
 
-const getUser = () => {
+const getUserFromStorage = () => {
   return JSON.parse(localStorage.getItem('user'));
 };
-const removeUser = () => {
+const removeUserFromStorage = () => {
   return localStorage.removeItem('user');
 };
 
-export { storeUser, getUser, removeUser };
+export { storeUser, getUserFromStorage, removeUserFromStorage };

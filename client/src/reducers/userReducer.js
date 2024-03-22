@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import login from '../services/loginService';
 import { addUser } from '../services/userService';
-import { storeUser, removeUser, getUser } from '../services/browserService';
+import {
+  storeUser,
+  removeUserFromStorage,
+  getUserFromStorage,
+} from '../services/browserService';
 
 const initialState = null;
 
@@ -13,7 +17,7 @@ const userSlice = createSlice({
     setUser(state, action) {
       return action.payload;
     },
-    emptyUser(state, action) {
+    clearUser(state, action) {
       return null;
     },
   },
@@ -42,15 +46,15 @@ export const createUser = (user) => {
 // Redux-thunk action to perform logout
 export const logoutUser = (user) => {
   return async (dispatch) => {
-    removeUser();
-    dispatch(emptyUser());
+    removeUserFromStorage();
+    dispatch(clearUser());
   };
 };
 
 // Redux-thunk action to perform page load and get user
 export const pageLoad = () => {
   return async (dispatch) => {
-    const storedUser = await getUser();
+    const storedUser = await getUserFromStorage();
     if (storedUser) {
       dispatch(setUser(storedUser));
     }

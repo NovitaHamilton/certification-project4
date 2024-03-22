@@ -9,10 +9,10 @@ import FlagIcon from '@mui/icons-material/Flag';
 import TaskForm from './TaskForm';
 import { useDispatch } from 'react-redux';
 import { deleteTaskAction } from '../../reducers/tasksReducer';
+import formatDueDate from '../../utils/formatDuedate';
 
 function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
   const [isTaskEditing, setIsTaskEditing] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleCloseTask = (e) => {
@@ -49,7 +49,7 @@ function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
           <div className="task-header">
             <div>
               <h2>{task.name}</h2>
-              <p>Due date: {task.dueDate}</p>
+              <p>Due date: {formatDueDate(task.dueDate)}</p>
             </div>
 
             <div className="edit-delete-icons">

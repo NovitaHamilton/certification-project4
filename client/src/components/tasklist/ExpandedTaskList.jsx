@@ -9,7 +9,7 @@ import ExpandedTask from '../task/ExpandedTask';
 import TaskForm from '../task/TaskForm';
 import { deleteTasklist, editTasklist } from '../../reducers/tasklistsReducer';
 import { useSelector, useDispatch } from 'react-redux';
-import { initTask, setCase } from '../../reducers/tasksReducer';
+import { initTask, setTaskCase } from '../../reducers/tasksReducer';
 
 function ExpandedTaskList() {
   // State to track whether Task List is in editing mode or not
@@ -41,7 +41,7 @@ function ExpandedTaskList() {
     if (tasklist) {
       dispatch(initTask(tasklist.id));
     } else {
-      dispatch(setCase([]));
+      dispatch(setTaskCase([]));
     }
   }, [tasklist]);
 

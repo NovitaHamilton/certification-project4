@@ -13,7 +13,7 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    setCase(state, action) {
+    setTaskCase(state, action) {
       return action.payload;
     },
     addCase(state, action) {
@@ -39,13 +39,14 @@ const tasksSlice = createSlice({
 });
 
 // Export actions
-export const { setCase, addCase, editCase, deleteCase } = tasksSlice.actions;
+export const { setTaskCase, addCase, editCase, deleteCase } =
+  tasksSlice.actions;
 
 export const initTask = (taskListId) => {
   return async (dispatch) => {
     const taskIds = (await getTaskList(taskListId)).tasks;
     const tasks = await Promise.all(taskIds.map((taskId) => getTask(taskId)));
-    dispatch(setCase(tasks));
+    dispatch(setTaskCase(tasks));
   };
 };
 

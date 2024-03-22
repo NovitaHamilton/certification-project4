@@ -104,7 +104,7 @@ function TaskForm({
               name="dueDate"
               selected={formInput.dueDate}
               onChange={(date) => setFormInput({ ...formInput, dueDate: date })}
-              dateFormat="eee, dd MMM yyyy"
+              dateFormat="eee, MMM dd, yyyy"
               required
             />
           </label>
