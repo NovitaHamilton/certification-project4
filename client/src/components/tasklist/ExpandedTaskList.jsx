@@ -70,11 +70,6 @@ function ExpandedTaskList() {
     setIsTasklistEditing(false);
   };
 
-  const handleSaveToLocalStorage = (e) => {
-    e.preventDefault();
-    localStorage.setItem('tasklists', JSON.stringify(tasklists));
-  };
-
   const handleToggleExpandedTask = (e, taskId) => {
     // Check if the event is triggered from 'close-icon'
     if (e && e.target.classList.contains('close-icon')) {
@@ -154,9 +149,6 @@ function ExpandedTaskList() {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="export-json-button">
-        <Button onClick={handleSaveToLocalStorage}>Save to localStorage</Button>
       </div>
     </div>
   );
