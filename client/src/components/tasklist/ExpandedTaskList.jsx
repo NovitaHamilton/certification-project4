@@ -20,6 +20,9 @@ function ExpandedTaskList() {
   const [expandedTaskId, setExpandedTaskId] = useState();
   // State to track if AddTaskForm open
   const [isAddTaskFormOpen, setIsAddTaskFormOpen] = useState(false);
+  // State for loadding tasklists
+  const [isLoading, setIsLoading] = useState(true);
+  const [tasklist, setTasklist] = useState(null);
 
   const tasklists = useSelector((store) => store.tasklists);
   const tasks = useSelector((store) => store.tasks);
@@ -28,22 +31,31 @@ function ExpandedTaskList() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // Reset expandedTaskId when user navigates to a different task list (id change)
+  // Reset expandedTaskId` when user navigates to a different task list (id change)
   useEffect(() => {
     setExpandedTaskId(null);
   }, [id]);
 
-  // Find the task list with the specified ID
-  const tasklist = tasklists.find((tasklist) => tasklist.id === id);
-
-  // Initialize tasks if tasklist is available
+  // To fetch tasklist and initialize tasks within the tasklist
   useEffect(() => {
+    // Find the task list with the specified ID
+    const tasklist = tasklists.find((tasklist) => tasklist.id === id);
     if (tasklist) {
+      setTasklist(tasklist);
       dispatch(initTask(tasklist.id));
     } else {
       dispatch(setTaskCase([]));
     }
-  }, [tasklist]);
+    setIsLoading(false);
+  }, [id, tasklists]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!tasklist) {
+    return <div>Error: Task list not found</div>;
+  }
 
   // onClick Functions
 
