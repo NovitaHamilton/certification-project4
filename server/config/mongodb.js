@@ -9,7 +9,7 @@ mongoose.set('strictQuery', false); //mongoose.set() method is used to set vario
 // To create and close connection
 
 const createConnection = async () => {
-  const databaseURL = process.env.MONGODB_URI;
+  const databaseURL = getDatabaseURL();
   try {
     console.log(`Connecting to... ${databaseURL}`);
     await mongoose.connect(databaseURL);
@@ -24,6 +24,14 @@ const closeConnection = async () => {
     await mongoose.connection.close();
   } catch (error) {
     console.log('Error closing connection:', error);
+  }
+};
+
+const getDatabaseURL = () => {
+  if (process.env.NODE_ENV === 'test') {
+    return process.env.TEST_MONGODB_URI;
+  } else {
+    return process.env.MONGODB_URI;
   }
 };
 
