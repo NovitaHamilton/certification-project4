@@ -15,7 +15,6 @@ function TaskForm({
   taskToEdit,
   setIsTaskEditing,
 }) {
-  console.log('Task to Edit:', taskToEdit);
   const [formInput, setFormInput] = useState({
     name: '',
     dueDate: new Date(), // Default to current date
@@ -24,7 +23,6 @@ function TaskForm({
   });
 
   const dispatch = useDispatch();
-  // const tasklists = useSelector((store) => store.tasklists);
 
   // If there's taskToEdit detected, the form input will be populated by the taskToEdit object
   useEffect(() => {
@@ -73,13 +71,11 @@ function TaskForm({
       priority: '',
     });
 
-    // Close Task Form
     closeTaskForm();
   };
 
   const handleCloseTaskForm = (e) => {
     e.preventDefault();
-    // Close Task Form
     closeTaskForm();
   };
 
