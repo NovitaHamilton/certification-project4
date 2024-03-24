@@ -1,0 +1,42 @@
+name: deployment_pipeline
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deployment_job:
+    runs-on: ubuntu-latest
+    steps:   
+      - name: Checkout code
+        uses: actions/checkout@v4
+  
+      - name: Setup Node environment
+        uses: actions/setup-node@v4
+  
+      - name: Install server dependencies
+        run: npm install
+        working-directory: server
+  
+      - name: Run backend tests
+        run: DB_URL=${{ secrets.TEST_DB_URL }} npm run test
+        working-directory: server
+
+      - name: Install client dependencies
+        run: npm install
+        working-directory: client
+
+      - name: Run frontend tests
+        run: npm run test
+        working-directory: client
+
+      - name: Run server deploy hook
+        run: curl ${{ secrets.SERVER_DEPLOYMENT_HOOK }}
+
+      - name: Run client deploy hook
+        run: curl ${{ secrets.CLIENT_DEPLOYMENT_HOOK }}
+        
+        
+      
+      
