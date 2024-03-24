@@ -20,7 +20,7 @@ jobs:
         working-directory: server
   
       - name: Run backend tests
-        run: DB_URL=${{ secrets.TEST_DB_URL }} npm run test
+        run: TEST_MONGODB_URI=${{ secrets.TEST_MONGODB_URI }} npm run test
         working-directory: server
 
       - name: Install client dependencies
