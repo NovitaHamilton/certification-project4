@@ -5,8 +5,8 @@ const api = supertest(server); // Creates a test api that will send requests whe
 
 beforeEach(async () => {
   // Clear data and load new entries for tests
-  await helper.clearData();
-  await helper.load();
+  await helper.clearTasks();
+  await helper.loadTasks();
 });
 
 afterAll((done) => {

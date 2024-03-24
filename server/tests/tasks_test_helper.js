@@ -22,18 +22,18 @@ const tasksInDb = async () => {
 };
 
 // Perform a bulk write
-const load = async () => {
+const loadTasks = async () => {
   await Task.insertMany(initialTasks);
 };
 
 // Clears all test tables in the database
-const clearData = async () => {
+const clearTasks = async () => {
   await Task.deleteMany({});
 };
 
 module.exports = {
   initialTasks,
   tasksInDb,
-  load,
-  clearData,
+  loadTasks,
+  clearTasks,
 };
