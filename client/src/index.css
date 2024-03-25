@@ -6,20 +6,48 @@
   padding: 0;
 }
 
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
 img,
 svg {
   display: block;
   max-width: 100%;
 }
 
-.App {
-  margin: 0;
-  padding: 1rem;
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
-.App nav li {
+.App {
+  margin: 0;
+  padding: 2rem;
+}
+
+/*----------Nav Bar------*/
+
+.App nav ul {
+  padding: 0; /* Remove default padding */
+}
+
+.App nav ul li {
+  display: inline;
   list-style: none;
+}
+
+.App nav ul li a {
+  color: darkorange;
+  font-size: 2em;
   font-weight: 700;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s;
+}
+
+.App nav ul li a:hover {
+  background-color: #27d4f3; /* Change background color on hover */
+  color: rgb(249, 248, 246);
 }
 
 .main-header {
@@ -32,15 +60,42 @@ svg {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  gap: 10rem;
+  gap: 30rem;
 }
 
+/*----------Main Page------*/
 .Home {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 2rem;
-  gap: 2rem;
+  padding: 3rem;
+  gap: 3rem;
+}
+
+.task-list-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 3rem;
+  list-style: none;
+}
+
+.task-list-item a {
+  text-decoration: none;
+  color: rgb(75, 73, 73);
+  font-weight: 400;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 1rem 3rem;
+  font-size: 1.5em;
+  border-radius: 0.3rem;
+  min-width: 40%;
+  max-width: 50%;
+  text-align: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.task-list-item a:hover {
+  background-color: #87ceeb;
 }
 
 .tasklists-buttons {
@@ -56,8 +111,8 @@ svg {
   align-items: flex-start;
   gap: 1rem;
   text-decoration: none;
-  border: 0.1rem solid;
-  padding: 1rem;
+  border: 1px solid;
+  padding: 2rem;
 }
 
 .expanded-task ul {
@@ -75,7 +130,7 @@ svg {
   cursor: pointer;
   list-style: none;
   border-bottom: 1px solid;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .task-item {
@@ -83,7 +138,7 @@ svg {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .task-name {
@@ -112,11 +167,6 @@ svg {
   gap: 0.5rem;
 }
 
-.export-json-button {
-  align-self: flex-end;
-  margin-top: 3rem;
-}
-
 .expanded-task {
   display: flex;
   flex-direction: column;
@@ -132,7 +182,7 @@ svg {
 
 .task-details p {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .above-task-header {

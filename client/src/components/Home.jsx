@@ -22,7 +22,7 @@ function Home() {
 
   return (
     <div className="Home">
-      <h1>My Task Lists</h1>
+      {/* <h1>My Task Lists</h1> */}
       <div className="tasklists-buttons">
         <Button onClick={handleAddTaskList}>Add Task List</Button>
       </div>
