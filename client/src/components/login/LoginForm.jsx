@@ -32,36 +32,39 @@ function LoginForm() {
   };
 
   return (
-    <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-      <label>
-        Username:
-        <input
-          name="name"
-          type="text"
-          placeholder="Enter username"
-          value={formInput.name}
-          onChange={handleInputChange}
-        ></input>{' '}
-      </label>
-      <label>
-        Password:
-        <input
-          name="password"
-          type="password"
-          placeholder="Enter password"
-          value={formInput.password}
-          onChange={handleInputChange}
-        ></input>
-      </label>
-      <div className="login-signup-buttons">
-        <Button type="submit" onClick={() => handleSubmit('login')}>
-          Login
-        </Button>
-        <Button type="submit" onClick={() => handleSubmit('signup')}>
-          Sign Up
-        </Button>
-      </div>
-    </form>
+    <div className="login-form-container">
+      <h1>Task Manager App</h1>
+      <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+        <label>
+          Username:
+          <input
+            name="name"
+            type="text"
+            placeholder="Enter username"
+            value={formInput.name}
+            onChange={handleInputChange}
+          ></input>{' '}
+        </label>
+        <label>
+          Password:
+          <input
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            value={formInput.password}
+            onChange={handleInputChange}
+          ></input>
+        </label>
+        <div className="login-signup-buttons">
+          <Button type="submit" onClick={() => handleSubmit('login')}>
+            Login
+          </Button>
+          <Button type="submit" onClick={() => handleSubmit('signup')}>
+            Sign Up
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }
 

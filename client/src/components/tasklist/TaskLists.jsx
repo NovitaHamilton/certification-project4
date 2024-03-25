@@ -7,10 +7,12 @@ function TaskLists() {
 
   return (
     <div className="task-lists">
-      <ul>
+      <ul className="task-list-container">
         {tasklists.map((tasklist) => (
-          <li key={tasklist.id}>
-            <Link to={`/tasklists/${tasklist.id}`}>{tasklist.name}</Link>
+          <li key={tasklist.id} className="task-list-item">
+            <Link to={`/tasklists/${tasklist.id}`} className="task-list-link">
+              {tasklist.name}
+            </Link>
           </li>
         ))}
       </ul>
