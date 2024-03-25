@@ -8,20 +8,20 @@ on:
 jobs:
   deployment_job:
     runs-on: ubuntu-latest
-    steps:   
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
-  
+
       - name: Setup Node environment
         uses: actions/setup-node@v4
-  
+
       - name: Install server dependencies
         run: npm install
         working-directory: server
-  
+
       # - name: Run backend tests
       #   env:
-      #     TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }} 
+      #     TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
       #   run: npm run test
       #   working-directory: server
 
@@ -38,7 +38,3 @@ jobs:
 
       - name: Run client deploy hook
         run: curl ${{ secrets.CLIENT_DEPLOYMENT_HOOK }}
-        
-        
-      
-      
