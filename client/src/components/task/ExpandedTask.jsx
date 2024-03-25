@@ -42,10 +42,8 @@ function ExpandedTask({ task, tasklist, handleToggleExpandedTask }) {
     <div className="expanded-task">
       {!isTaskEditing ? (
         <>
-          <div className="above-task-header">
-            {/* <Button onClick={markTaskComplete}>Mark as Complete</Button> */}
-            <CloseIcon className="close-icon" onClick={handleCloseTask} />
-          </div>
+          <CloseIcon className="close-icon" onClick={handleCloseTask} />
+
           <div className="task-header">
             <div>
               <h2>{task.name}</h2>
