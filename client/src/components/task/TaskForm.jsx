@@ -89,7 +89,7 @@ function TaskForm({
           <input
             name="name"
             type="text"
-            placeholder="Add Title"
+            placeholder="Add Task name"
             value={formInput.name}
             onChange={handleInputChange}
             required
@@ -107,23 +107,6 @@ function TaskForm({
         </div>
         <CloseIcon className="close-icon" onClick={handleCloseTaskForm} />
       </div>
-      {/*<label className="task-form-details">
-        <SourceIcon />
-        <select
-          name="taskList"
-          value={formInput.taskList}
-          onChange={handleInputChange}
-        >
-          <option value="">{tasklist.name}</option>
-          {tasklists
-            .filter((list) => list.id !== tasklist.id)
-            .map((list) => (
-              <option key={list.id} value={list.name}>
-                {list.name}
-              </option>
-            ))}
-        </select>
-            </label>*/}
       <label className="task-form-details">
         <CheckCircleOutlineIcon />
         <select

@@ -18,6 +18,6 @@ describe('Testing Home component', () => {
         <Home />
       </Provider>
     );
-    expect(getByText('My Task Lists')).toBeInTheDocument();
+    expect(getByText('Add Task List')).toBeInTheDocument();
   });
 });
