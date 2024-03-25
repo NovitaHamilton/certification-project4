@@ -12,7 +12,7 @@ function Login() {
       {user ? (
         <div className="logged-in">
           <p>
-            <strong>{user.name}</strong> is logged in
+            <strong>{user.name}</strong>
           </p>
           <Button onClick={() => dispatch(logoutUser())}>Log out</Button>
         </div>
