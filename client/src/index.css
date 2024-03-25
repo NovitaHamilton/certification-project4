@@ -74,6 +74,8 @@ body {
   gap: 3rem;
 }
 
+/*----------Task Lists------*/
+
 .task-list-container {
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
@@ -112,7 +114,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 2rem;
   text-decoration: none;
   box-shadow: 0 0 2rem;
   margin-top: 7rem;
@@ -161,6 +163,8 @@ body {
   font-size: 1.5em; /* Adjust font size for the icons */
 }
 
+/*----------Tasks------*/
+
 .task-header {
   display: flex;
   justify-content: space-between;
@@ -201,6 +205,10 @@ body {
   align-items: flex-start;
 }
 
+.tasks-container {
+  width: 100%;
+}
+
 .tasks-container ul {
   display: flex;
   flex-direction: column;
@@ -209,8 +217,8 @@ body {
 .tasks-container li {
   cursor: pointer;
   list-style: none;
-  border-bottom: 1px solid;
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
+  display: flex;
 }
 
 .task-item {
@@ -219,15 +227,25 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: white;
 }
 
 .task-name {
   align-self: flex-start;
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 .task-info {
-  text-align: center;
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1.5em;
+}
+
+.task-info:last-child {
+  margin-left: 1rem;
 }
 
 /* Add Task Form*/
