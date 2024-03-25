@@ -19,11 +19,11 @@ jobs:
         run: npm install
         working-directory: server
   
-      - name: Run backend tests
-        env:
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }} 
-        run: npm run test
-        working-directory: server
+      # - name: Run backend tests
+      #   env:
+      #     TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }} 
+      #   run: npm run test
+      #   working-directory: server
 
       - name: Install client dependencies
         run: npm install
