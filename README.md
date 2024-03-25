@@ -5,7 +5,7 @@ Building back-end for Interactive task manager application with with a running n
 - [x] Setting up mongoDB
 - [x] Setting up the express-server
 - [x] Adding security & login
-- [ ] Connecting frontend & backend **--> Currently here**
-- [ ] Adding frontend testing
-- [ ] Testing backend with supertest
-- [ ] Production deployment
+- [x] Connecting frontend & backend
+- [x] Adding frontend testing
+- [x] Testing backend with supertest
+- [x] Production deployment
