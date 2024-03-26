@@ -7,9 +7,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://task-manager-yvd3.onrender.com',
+        target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '') // This will remove the '/api' prefix
+        // rewrite: (path) => path.replace(/^\/api/, ''), // This will remove the '/api' prefix
       },
     },
   },
