@@ -13,7 +13,9 @@ const getTaskLists = async () => {
 
 const getTaskList = async (taskListId) => {
   try {
-    const response = await axios.get(`${baseURL}/${taskListId}`);
+    const response = await axios.get(
+      `https://task-manager-yvd3.onrender.com/api/tasklists/${taskListId}`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching tasklist:', error);
