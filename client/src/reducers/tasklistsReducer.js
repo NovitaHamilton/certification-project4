@@ -45,11 +45,20 @@ export const { setCase, editCase, deleteCase, loadLocalStorage, addCase } =
 // Redux-thunk action that initializes baskets (on login)
 export const initTaskLists = (userId) => {
   return async (dispatch) => {
-    const taskListIds = (await getUser(userId)).tasklists;
-    const tasklists = await Promise.all(
-      taskListIds.map((taskListId) => getTaskList(taskListId))
-    );
-    dispatch(setCase(tasklists));
+    try {
+      const user = await getUser(userId);
+      if (!user || !user.tasklists) {
+        // Handle case where user or tasklists are empty
+        return;
+      }
+      const taskListIds = user.tasklists;
+      const tasklists = await Promise.all(
+        taskListIds.map((taskListId) => getTaskList(taskListId))
+      );
+      dispatch(setCase(tasklists));
+    } catch (error) {
+      console.error('Error initializing task lists:', error);
+    }
   };
 };
 
